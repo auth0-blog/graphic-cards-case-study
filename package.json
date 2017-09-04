@@ -4,7 +4,7 @@
   "description": "How Auth0 helped a huge graphic cards manufacturer to solve identity",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node ."
   },
   "repository": {
     "type": "git",
@@ -21,7 +21,10 @@
   },
   "homepage": "https://github.com/auth0-blog/graphic-cards-case-study#readme",
   "dependencies": {
+    "compression": "^1.7.0",
     "express": "^4.15.4",
+    "helmet": "^3.8.1",
+    "morgan": "^1.8.2",
     "mysql": "^2.14.1",
     "promise-mysql": "^3.0.2"
   }
