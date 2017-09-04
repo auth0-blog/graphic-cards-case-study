@@ -6,7 +6,7 @@ docker build -t node-app .
 
 docker run --name app-1-mysql -d -p 3001:3000 node-app
 
-docker run --name app-mysql \
+docker run --name mysql \
     -p 3306:3306 \
     -e MYSQL_ROOT_PASSWORD=myextremellysecretpassword \
     -e MYSQL_DATABASE=node-1 \
