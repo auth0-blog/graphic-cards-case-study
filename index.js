@@ -14,7 +14,7 @@ const mysqlProps = {
 
 console.log(mysqlProps);
 
-timeout(15000)
+timeout(10000)
     .then(mysql.createConnection(mysqlProps))
     .then(() => {
         app.listen(3000, function () {
@@ -22,6 +22,7 @@ timeout(15000)
         });
 
         app.get('/', function (req, res) {
+            console.log('got a request');
             res.send('Hello World!')
         });
     }).catch((error) => {
