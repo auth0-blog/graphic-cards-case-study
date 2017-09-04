@@ -1,0 +1,28 @@
+{
+  "name": "graphic-cards-case-study",
+  "version": "1.0.0",
+  "description": "How Auth0 helped a huge graphic cards manufacturer to solve identity",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/auth0-blog/graphic-cards-case-study.git"
+  },
+  "keywords": [
+    "auth0",
+    "identity"
+  ],
+  "author": "Bruno Krebs",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/auth0-blog/graphic-cards-case-study/issues"
+  },
+  "homepage": "https://github.com/auth0-blog/graphic-cards-case-study#readme",
+  "dependencies": {
+    "express": "^4.15.4",
+    "mysql": "^2.14.1",
+    "promise-mysql": "^3.0.2"
+  }
+}

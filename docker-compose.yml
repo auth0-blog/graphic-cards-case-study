@@ -1,0 +1,41 @@
+version: '3'
+
+services:
+  mysql-1:
+    image: mysql:5.7
+    environment:
+      MYSQL_ROOT_PASSWORD: myextremellysecretpassword
+      MYSQL_DATABASE: node-1
+      MYSQL_USER: app-mysql
+      MYSQL_PASSWORD: mysecretpassword
+    ports:
+      - ${PORT_MYSQL_1:-3307}:3306
+  mysql-2:
+    image: mysql:5.7
+    environment:
+      MYSQL_ROOT_PASSWORD: myextremellysecretpassword
+      MYSQL_DATABASE: node-2
+      MYSQL_USER: app-mysql
+      MYSQL_PASSWORD: mysecretpassword
+    ports:
+      - ${PORT_MYSQL_2:-3308}:3306
+  node-1:
+    build: .
+    ports:
+      - ${PORT_APP_1:-3001}:3000
+    environment:
+      MYSQL_HOST: mysql-1
+      MYSQL_USER: app-mysql
+      MYSQL_DATABASE: node-1
+      MYSQL_PASSWORD: mysecretpassword
+      NODE_PORT: ${PORT_APP_1:-3001}
+  node-2:
+    build: .
+    ports:
+      - ${PORT_APP_2:-3002}:3000
+    environment:
+      MYSQL_HOST: mysql-2
+      MYSQL_USER: app-mysql
+      MYSQL_DATABASE: node-2
+      MYSQL_PASSWORD: mysecretpassword
+      NODE_PORT: ${PORT_APP_2:-3002}
