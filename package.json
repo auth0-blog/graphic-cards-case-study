@@ -21,6 +21,7 @@
   },
   "homepage": "https://github.com/auth0-blog/graphic-cards-case-study#readme",
   "dependencies": {
+    "body-parser": "^1.17.2",
     "compression": "^1.7.0",
     "express": "^4.15.4",
     "helmet": "^3.8.1",

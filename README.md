@@ -48,3 +48,16 @@ To stop, remove, and clean everything, we can run the following commands:
 docker stop mysql node
 docker rm mysql node
 ```
+
+## Interacting with the API
+
+```bash
+curl http://localhost:3000/users
+
+curl http://localhost:3000/users/2
+
+curl -X POST -H "Content-Type: application/json" -d '{
+    "username": "bruno",
+    "password": "123456"
+}' http://localhost:3000/users/authenticate
+```
