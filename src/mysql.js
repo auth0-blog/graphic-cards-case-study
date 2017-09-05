@@ -1,3 +1,4 @@
+const fs = require('fs');
 const mysql = require('promise-mysql');
 const util = require('util');
 const timeout = util.promisify(setTimeout);
@@ -18,13 +19,11 @@ function connect() {
         return connection.query('show tables');
     }).then((rows) => {
         if (rows.length === 0) {
-            return connection.query(`
-                create table users (
-                     id mediumint not null auto_increment,
-                     name char(30) not null,
-                     primary key (id)
-                );
-            `);
+            return connection.query(fs.readFileSync('./db/schema.sql').toString());
+        }
+    }).then((tablesCreated) => {
+        if (tablesCreated) {
+            return connection.query(fs.readFileSync(`./db/${mysqlProps.database}-users.sql`).toString());
         }
     }).catch((error) => {
         console.error(error);
