@@ -52,11 +52,23 @@ docker rm mysql node
 ## Interacting with the API
 
 ```bash
-curl http://localhost:3000/users
+ACCESS_TOKEN=$(curl --request POST \
+  --url https://bkrebs.auth0.com/oauth/token \
+  --header 'content-type: application/json' \
+  --data '{
+    "client_id": "3qu4Cxt4h2x9Em7Cj0s7Zg5FxhQLjiiK",
+    "client_secret": "sUOIf4Psed68nU4hZvHlkRE2vCgUJF4UHlymKOJrgpn6oL8NJ3bOvdA1Y4ajo3IW",
+    "audience":"http://sample-app/",
+    "grant_type":"client_credentials"
+}' | jq '.access_token' -r)
 
-curl http://localhost:3000/users/2
+curl -H "Authorization: Bearer $ACCESS_TOKEN" http://localhost:3000/users
 
-curl -X POST -H "Content-Type: application/json" -d '{
+curl -H "Authorization: Bearer $ACCESS_TOKEN" http://localhost:3000/users/2
+
+curl -X POST -H "Content-Type: application/json" \
+ -H "Authorization: Bearer $ACCESS_TOKEN" \
+ -d '{
     "username": "bruno",
     "password": "123456"
 }' http://localhost:3000/users/authenticate
