@@ -1,23 +1,14 @@
 const mysql = require('./mysql');
+const router = require('express').Router();
 
-module.exports = {
-    get: [
-        { path: '/users', handler: getUsers },
-        { path: '/users/:userId', handler: getUserById }
-    ]
-};
-
-const users = [
-    { id: 1, name: 'Bruno Krebs' },
-    { id: 2, name: 'Maria da Silva' }
-];
-
-function getUsers(req, res) {
+router.get('/', (req, res) => {
     mysql().query('select * from users').then((rows) => {
         res.send(rows);
     });
-}
+});
 
-function getUserById(req, res) {
-    res.send(users[0]);
-}
+router.get('/:id', (req, res) => {
+    res.send({ id: 1, name: 'Bruno Krebs' });
+});
+
+module.exports = router;
