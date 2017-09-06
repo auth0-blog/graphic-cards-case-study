@@ -1,6 +1,10 @@
 version: '3'
 
 services:
+  nginx:
+    build: ./nginx/
+    ports:
+      - 80:80
   mysql-1:
     image: mysql:5.7
     environment:
