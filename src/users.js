@@ -2,6 +2,7 @@ const mysql = require('./mysql');
 const router = require('express').Router();
 
 router.get('/', (req, res) => {
+    console.log('getting users');
     mysql().query('select * from users').then((rows) => {
         res.send(rows);
     });
