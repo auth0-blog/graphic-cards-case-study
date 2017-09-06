@@ -17,9 +17,9 @@ docker-compose up
 To stop, remove, and clean everything, we can run the following commands:
 
 ```bash
-docker stop gcards_node-2_1 gcards_node-1_1 gcards_mysql-2_1 gcards_mysql-1_1
+docker stop gcards_node-2_1 gcards_node-1_1 gcards_mysql-2_1 gcards_mysql-1_1 gcards_nginx_1
 
-docker rm gcards_node-2_1 gcards_node-1_1 gcards_mysql-2_1 gcards_mysql-1_1
+docker rm gcards_node-2_1 gcards_node-1_1 gcards_mysql-2_1 gcards_mysql-1_1 gcards_nginx_1
 
 docker network rm gcards_default
 ```
