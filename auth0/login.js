@@ -1,10 +1,10 @@
 function login(email, password, callback) {
-    var request = require('request-promise@1.0.2');
+    const request = require('request-promise@1.0.2');
 
-    var userApp1;
-    var accessToken;
+    let userApp1;
+    let accessToken;
 
-    var getTokenOptions = {
+    const getTokenOptions = {
         method: 'POST',
         url: 'https://bkrebs.auth0.com/oauth/token',
         headers: {'content-type': 'application/json'},
@@ -24,12 +24,12 @@ function login(email, password, callback) {
 
     }).then(function (body) {
 
-        var userApp2 = JSON.parse(body);
+        const userApp2 = JSON.parse(body);
 
         Object.keys(userApp1).forEach((key) => (userApp1[key] === null) && delete userApp1[key]);
         Object.keys(userApp2).forEach((key) => (userApp2[key] === null) && delete userApp2[key]);
 
-        var profile = Object.assign({}, userApp2, userApp1);
+        const profile = Object.assign({}, userApp2, userApp1);
         profile.email = email;
 
         return callback(null, profile);
@@ -46,7 +46,7 @@ function login(email, password, callback) {
     });
 
     function authenticate(url) {
-        var authApp1Options = {
+        const authApp1Options = {
             method: 'POST',
             url: url,
             headers: {
