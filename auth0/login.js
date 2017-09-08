@@ -41,7 +41,7 @@ function login(email, password, callback) {
                 'Authorization': 'Bearer ' + accessToken,
                 'content-type': 'application/json'
             },
-            body: '{ "username": "' + email + '", "password": "' + password + '" }'
+            body: '{ "email": "' + email + '", "password": "' + password + '" }'
         };
         return request(options);
     }
