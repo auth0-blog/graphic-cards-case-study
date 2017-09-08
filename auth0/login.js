@@ -31,7 +31,9 @@ function login(email, password, callback) {
         return callback(null, profile);
     });
 
-    authenticate();
+    authenticate().catch(function(e) {
+        return callback(new Error(e));
+    });
 
     function legacyAuth(accessToken, url) {
         const options = {
