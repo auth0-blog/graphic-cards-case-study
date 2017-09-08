@@ -69,7 +69,7 @@ curl -H "Authorization: Bearer $ACCESS_TOKEN" http://localhost:3000/users/2
 curl -X POST -H "Content-Type: application/json" \
  -H "Authorization: Bearer $ACCESS_TOKEN" \
  -d '{
-    "username": "bruno",
+    "email": "bruno@spam4.me",
     "password": "123456"
 }' http://localhost:3000/users/authenticate
 ```

@@ -1,9 +1,9 @@
-function login(email, password, callback) {
+function getByEmail(email, callback) {
     "use strict";
     const request = require('request-promise@1.0.2');
     const Promise = require('bluebird@3.4.6');
 
-    const authenticate = Promise.coroutine(function *() {
+    const fetchProfile = Promise.coroutine(function *() {
         const getTokenOptions = {
             method: 'POST',
             url: 'https://bkrebs.auth0.com/oauth/token',
@@ -16,15 +16,23 @@ function login(email, password, callback) {
         const accessToken = JSON.parse(tokenResponse).access_token;
 
         //gets the user profile from the both application
-        let profileApp1 = {};
-        let profileApp2 = {};
+        let profileApp1 = null;
+        let profileApp2 = null;
         try {
-            profileApp1 = JSON.parse(yield legacyAuth(accessToken, 'http://node-app-1.tk/users/authenticate'));
+            profileApp1 = JSON.parse(yield findByEmail(accessToken, 'http://node-app-1.tk/users/'));
         } catch (e) { }
 
         try {
-            profileApp2 = JSON.parse(yield legacyAuth(accessToken, 'http://node-app-2.tk/users/authenticate'));
+            profileApp2 = JSON.parse(yield findByEmail(accessToken, 'http://node-app-2.tk/users/'));
         } catch (e) { }
+
+        // no profiles found?
+        if (profileApp1 === null && profileApp2 === null) {
+            return callback(null);
+        }
+
+        profileApp1 = profileApp1 || {};
+        profileApp2 = profileApp2 || {};
 
         // removes null properties from both profile to make merge (assign) unaware of them
         Object.keys(profileApp1).forEach((key) => (profileApp1[key] === null) && delete profileApp1[key]);
@@ -35,19 +43,18 @@ function login(email, password, callback) {
         return callback(null, profile);
     });
 
-    authenticate().catch(function(e) {
+    fetchProfile().catch(function(e) {
         return callback(new Error(e));
     });
 
-    function legacyAuth(accessToken, url) {
+    function findByEmail(accessToken, url) {
         const options = {
-            method: 'POST',
-            url: url,
+            method: 'GET',
+            url: url + email,
             headers: {
                 'Authorization': 'Bearer ' + accessToken,
                 'content-type': 'application/json'
             },
-            body: '{ "email": "' + email + '", "password": "' + password + '" }'
         };
         return request(options);
     }
