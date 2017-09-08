@@ -10,7 +10,7 @@ const jwtCheck = jwt({
         jwksRequestsPerMinute: 5,
         jwksUri: "https://bkrebs.auth0.com/.well-known/jwks.json"
     }),
-    audience: 'http://sample-app/',
+    audience: 'legacy-idp',
     issuer: "https://bkrebs.auth0.com/",
     algorithms: ['RS256']
 });

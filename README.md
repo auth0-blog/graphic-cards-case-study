@@ -58,7 +58,7 @@ ACCESS_TOKEN=$(curl --request POST \
   --data '{
     "client_id": "3qu4Cxt4h2x9Em7Cj0s7Zg5FxhQLjiiK",
     "client_secret": "sUOIf4Psed68nU4hZvHlkRE2vCgUJF4UHlymKOJrgpn6oL8NJ3bOvdA1Y4ajo3IW",
-    "audience":"http://sample-app/",
+    "audience":"legacy-idp",
     "grant_type":"client_credentials"
 }' | jq '.access_token' -r)
 
