@@ -1,7 +1,6 @@
 create table users (
    id mediumint not null auto_increment,
    email char(50) not null,
-   username char(50) not null,
    password char(50) not null,
    name char(50) not null,
    lastname char(50),
