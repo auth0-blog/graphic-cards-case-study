@@ -8,7 +8,7 @@ function login(email, password, callback) {
             method: 'POST',
             url: 'https://bkrebs.auth0.com/oauth/token',
             headers: {'content-type': 'application/json'},
-            body: '{"client_id":"3qu4Cxt4h2x9Em7Cj0s7Zg5FxhQLjiiK", "client_secret":"sUOIf4Psed68nU4hZvHlkRE2vCgUJF4UHlymKOJrgpn6oL8NJ3bOvdA1Y4ajo3IW","audience":"legacy-idp","grant_type":"client_credentials"}'
+            body: '{"client_id":"BvEdrxK2T2f36Hnttintbe4yIEjUC5P2", "client_secret":"13rf3mN0ciOEckabpE4TF4LYstBfOa19DYUBED7-MMzEM-CjR2ig_kifTfyy3Hoh","audience":"legacy-idp","grant_type":"client_credentials"}'
         };
 
         // gets an access token to communicate with the legacy identity resources
