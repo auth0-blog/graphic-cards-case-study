@@ -56,15 +56,15 @@ ACCESS_TOKEN=$(curl --request POST \
   --url https://bkrebs.auth0.com/oauth/token \
   --header 'content-type: application/json' \
   --data '{
-    "client_id": "3qu4Cxt4h2x9Em7Cj0s7Zg5FxhQLjiiK",
-    "client_secret": "sUOIf4Psed68nU4hZvHlkRE2vCgUJF4UHlymKOJrgpn6oL8NJ3bOvdA1Y4ajo3IW",
+    "client_id": "BvEdrxK2T2f36Hnttintbe4yIEjUC5P2",
+    "client_secret": "13rf3mN0ciOEckabpE4TF4LYstBfOa19DYUBED7-MMzEM-CjR2ig_kifTfyy3Hoh",
     "audience":"legacy-idp",
     "grant_type":"client_credentials"
 }' | jq '.access_token' -r)
 
 curl -H "Authorization: Bearer $ACCESS_TOKEN" http://localhost:3000/users
 
-curl -H "Authorization: Bearer $ACCESS_TOKEN" http://localhost:3000/users/2
+curl -H "Authorization: Bearer $ACCESS_TOKEN" http://localhost:3000/users/bruno@spam4.me
 
 curl -X POST -H "Content-Type: application/json" \
  -H "Authorization: Bearer $ACCESS_TOKEN" \

@@ -1,35 +1,39 @@
-const mysql = require('./mysql');
 const router = require('express').Router();
+const users = require(`../db/${process.env.MYSQL_DATABASE || 'node-1'}-users`);
 
 router.get('/', (req, res) => {
     console.log('getting users');
-    mysql().query('select * from users').then((rows) => {
-        res.send(rows);
-    });
+    res.send(users);
 });
 
 router.get('/:email', (req, res) => {
-    const query = 'select * from users where email = ? limit 1';
     const { email } = req.params;
-    mysql().query(query, [email]).then((users) => {
-        if (users.length === 0) {
-            res.status(404);
-            res.send({ message: 'User not found' });
+    let userFound = false;
+    users.forEach((user) => {
+        if (user.email === email) {
+            res.send(users[0]);
+            userFound = true;
         }
-        res.send(users[0]);
     });
+    if (!userFound) {
+        res.status(404);
+        res.send({ message: 'User not found' });
+    }
 });
 
 router.post('/authenticate', (req, res) => {
-    const query = 'select * from users where email = ? and password = ? limit 1';
     const { email, password } = req.body;
-    mysql().query(query, [email, password]).then((users) => {
-        if (users.length === 0) {
-            res.status(404);
-            res.send({ message: 'User not found' });
+    let userFound = false;
+    users.forEach((user) => {
+        if (user.email === email && user.password === password) {
+            res.send(users[0]);
+            userFound = true;
         }
-        res.send(users[0]);
     });
+    if (!userFound) {
+        res.status(404);
+        res.send({message: 'User not found'});
+    }
 });
 
 module.exports = router;
