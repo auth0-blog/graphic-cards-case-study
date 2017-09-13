@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const users = require(`../db/${process.env.MYSQL_DATABASE || 'node-1'}-users`);
+const users = require(`../db/${process.env.app || 'node-1'}-users`);
 
 router.get('/', (req, res) => {
     console.log('getting users');
@@ -11,7 +11,7 @@ router.get('/:email', (req, res) => {
     let userFound = false;
     users.forEach((user) => {
         if (user.email === email) {
-            res.send(users[0]);
+            res.send(user);
             userFound = true;
         }
     });
@@ -26,7 +26,7 @@ router.post('/authenticate', (req, res) => {
     let userFound = false;
     users.forEach((user) => {
         if (user.email === email && user.password === password) {
-            res.send(users[0]);
+            res.send(user);
             userFound = true;
         }
     });

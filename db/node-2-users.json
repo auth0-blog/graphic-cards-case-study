@@ -1,4 +1,4 @@
 [
-  { "email": "bruno@spam4.me", "password": "123456", "name": "Bruno", "lastname": null, "address": null, "city": "New York" },
-  { "email": "serena@spam4.me", "password": "123456", "name": "Serena", "lastname": "Williams", "address": null, "city": "New York" }
+  { "email": "bruno@spam4.me", "password": "123456", "name": "Bruno", "lastname": "Krebs", "address": "5th Avenue", "city": null },
+  { "email": "venus@spam4.me", "password": "123456", "name": "Venus", "lastname": "Williams", "address": null, "city": "New York" }
 ]

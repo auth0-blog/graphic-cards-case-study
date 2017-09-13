@@ -3,6 +3,46 @@
 This repository contains a Node.js sample application that is used on this blog post. The blog post
 talks about how Auth0 helped a huge graphic cards manufacturer to solve identity management.
 
+## Bootstrapping
+
+```bash
+docker build --build-arg app=node-1 -t node-app-1 .
+docker build --build-arg app=node-2 -t node-app-2 .
+
+docker run --name node-1 -d -p 3001:3000 node-app-1
+docker run --name node-2 -d -p 3002:3000 node-app-2
+
+now -e app="node-1" --docker --public
+now -e app="node-2" --docker --public
+
+ACCESS_TOKEN=$(curl --request POST \
+  --url https://bkrebs.auth0.com/oauth/token \
+  --header 'content-type: application/json' \
+  --data '{
+    "client_id": "BvEdrxK2T2f36Hnttintbe4yIEjUC5P2",
+    "client_secret": "13rf3mN0ciOEckabpE4TF4LYstBfOa19DYUBED7-MMzEM-CjR2ig_kifTfyy3Hoh",
+    "audience":"legacy-idp",
+    "grant_type":"client_credentials"
+}' | jq '.access_token' -r)
+
+curl -H "Authorization: Bearer $ACCESS_TOKEN" https://node-app-1.now.sh/users/serena@spam4.me
+curl -H "Authorization: Bearer $ACCESS_TOKEN" https://node-app-2.now.sh/users/venus@spam4.me
+
+curl -X POST -H "Content-Type: application/json" \
+ -H "Authorization: Bearer $ACCESS_TOKEN" \
+ -d '{
+    "email": "bruno@spam4.me",
+    "password": "123456"
+}' https://node-app-1.now.sh/users/authenticate
+
+curl -X POST -H "Content-Type: application/json" \
+ -H "Authorization: Bearer $ACCESS_TOKEN" \
+ -d '{
+    "email": "venus@spam4.me",
+    "password": "123456"
+}' https://node-app-2.now.sh/users/authenticate
+```
+
 ## Bootstrapping with Docker Compose
 
 The sample application used in the blog post is run twice to simulate different apps with their own users. To 
@@ -64,7 +104,6 @@ ACCESS_TOKEN=$(curl --request POST \
 
 curl -H "Authorization: Bearer $ACCESS_TOKEN" http://localhost:3000/users
 
-curl -H "Authorization: Bearer $ACCESS_TOKEN" http://localhost:3000/users/bruno@spam4.me
 
 curl -X POST -H "Content-Type: application/json" \
  -H "Authorization: Bearer $ACCESS_TOKEN" \

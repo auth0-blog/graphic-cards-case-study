@@ -3,6 +3,10 @@ const users = require('./src/users');
 const jwt = require('express-jwt');
 const jwks = require('jwks-rsa');
 
+console.log(process.env.app);
+process.env.app = process.env.app || 'node-1';
+console.log(process.env.app);
+
 const jwtCheck = jwt({
     secret: jwks.expressJwtSecret({
         cache: true,
