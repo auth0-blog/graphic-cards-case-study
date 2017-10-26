@@ -1,4 +1,4 @@
-FROM node
+FROM node:alpine
 
 # Create app dir
 RUN mkdir -p /usr/src/app
@@ -8,6 +8,8 @@ WORKDIR /usr/src/app
 COPY package.json /usr/src/app/
 COPY package-lock.json /usr/src/app/
 RUN npm install
+RUN apk add --no-cache bash
+RUN apk add --no-cache curl
 
 # env variables
 ARG app
