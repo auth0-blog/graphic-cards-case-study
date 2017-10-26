@@ -21,14 +21,14 @@
   },
   "homepage": "https://github.com/auth0-blog/graphic-cards-case-study#readme",
   "dependencies": {
-    "body-parser": "^1.17.2",
-    "compression": "^1.7.0",
-    "express": "^4.15.4",
+    "body-parser": "^1.18.2",
+    "compression": "^1.7.1",
+    "express": "^4.16.2",
     "express-jwt": "^5.3.0",
-    "helmet": "^3.8.1",
-    "jwks-rsa": "^1.2.0",
-    "morgan": "^1.8.2",
-    "mysql": "^2.14.1",
-    "promise-mysql": "^3.0.2"
+    "helmet": "^3.9.0",
+    "jwks-rsa": "^1.2.1",
+    "morgan": "^1.9.0",
+    "mysql": "^2.15.0",
+    "promise-mysql": "^3.1.1"
   }
 }

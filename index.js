@@ -21,6 +21,20 @@ const jwtCheck = jwt({
 
 app.use(jwtCheck);
 
+app.use((req, res, next) => {
+    let requiredScope = null;
+    if (process.env.app === 'node-1') {
+        requiredScope = "authenticate:app1";
+    } else {
+        requiredScope = "authenticate:app2";
+    }
+    if (!req.user || !req.user.scope || !req.user.scope.indexOf(requiredScope)) {
+        res.sendStatus(401);
+        return;
+    }
+    next();
+});
+
 app.use('/users', users);
 
 app.listen(3000, function () {
